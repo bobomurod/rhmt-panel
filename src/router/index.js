@@ -342,6 +342,18 @@ export const asyncRouterMap = [
   },
 
   {
+    path: '/rahmat',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/rahmat/index'),
+        name: 'rahmat',
+        meta: { title: 'rahmat', icon: 'international' }
+      }
+    ]
+  },
+  {
     path: '/i18n',
     component: Layout,
     children: [

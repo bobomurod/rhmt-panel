@@ -10,7 +10,9 @@
         </keep-alive>
       </el-tab-pane>
     </el-tabs>
-    <p>{{ testmethod() }}</p>
+    <div v-for="holder in holders" :key="holder.id">
+      <p>{{ holder }} </p>
+    </div>
   </div>
 </template>
 <script>
@@ -33,13 +35,20 @@ export default {
       activeName: 'CN',
       createdTimes: 0,
       list: null,
-      listLoading: true
+      listLoading: true,
+      holders: [],
     }
   },
+  mounted: function() {
+      // console.log("this.holders");
+      fetchDetails().then(result => {
+        this.holders = result.data;
+        console.log(this.holders);
+      })
+    },
   methods: {
     showCreatedTimes() {
       this.createdTimes = this.createdTimes + 1
-      console.log("k3dnf")
     },
     // fetchData() {
     //   this.listLoading = true
@@ -50,7 +59,15 @@ export default {
     // },
     testmethod() {
       fetchDetails().then(result => {console.log(result.data)})
-      }
+      },
+    
+    getHolders() {
+      // console.log("this.holders");
+      fetchDetails().then(result => {
+        this.holders = result.data;
+        console.log(this.holders);
+      })
+    }
     }
   }
 </script>

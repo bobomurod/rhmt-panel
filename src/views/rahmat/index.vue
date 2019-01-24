@@ -1,3 +1,4 @@
+
 <template>
   <div class="tab-container">
     <el-tag>mounted times ：{{ createdTimes }}</el-tag>
@@ -9,11 +10,14 @@
         </keep-alive>
       </el-tab-pane>
     </el-tabs>
+    <p>{{ testmethod() }}</p>
   </div>
 </template>
-
 <script>
+/* eslint-disable */
+
 import tabPane from './components/tabPane'
+import { fetchDetails } from '@/api/details'
 
 export default {
   name: 'Tab',
@@ -27,15 +31,28 @@ export default {
         { label: 'Eurozone', key: 'EU' }
       ],
       activeName: 'CN',
-      createdTimes: 0
+      createdTimes: 0,
+      list: null,
+      listLoading: true
     }
   },
   methods: {
     showCreatedTimes() {
       this.createdTimes = this.createdTimes + 1
+      console.log("k3dnf")
+    },
+    // fetchData() {
+    //   this.listLoading = true
+    //   fetchDetails().then(response => {
+    //     this.list = response.data.items
+    //     this.listLoading = false
+    //   }).then(responsed => { console.log(this.list) })
+    // },
+    testmethod() {
+      fetchDetails().then(result => {console.log(result.data)})
+      }
     }
   }
-}
 </script>
 
 <style scoped>
